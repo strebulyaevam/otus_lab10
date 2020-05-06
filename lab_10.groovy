@@ -22,7 +22,6 @@
 post {
        always  {
            script{
-                testng '**/testng-results.xml'
                 emailext subject: "Build report: Project name -> ${env.JOB_NAME}", body: "<b>Tests Results</b><br>Project: ${currentBuild.projectName} <br>Build Number: ${env.BUILD_NUMBER} <br>Status:${currentBuild.currentResult} <br>Branch: ${env.git_branch} <br>Duration: ${currentBuild.durationString} <br>Test_total: ${env.test_total}", mimeType: 'text/html', to: '$DEFAULT_RECIPIENTS'         
                 slackSend channel: '#jenkins-rep', message: 'New build is ready. Check your e-mail for details.'
            }
